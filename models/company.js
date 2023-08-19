@@ -49,15 +49,43 @@ class Company {
    * Returns [{ handle, name, description, numEmployees, logoUrl }, ...]
    * */
 
-  static async findAll() {
-    const companiesRes = await db.query(
-          `SELECT handle,
-                  name,
-                  description,
-                  num_employees AS "numEmployees",
-                  logo_url AS "logoUrl"
-           FROM companies
-           ORDER BY name`);
+  static async findAll(filters = {}) { //accepts single arguement named filters
+
+    //define columns that should be selected from the database
+    let query = `SELECT handle, 
+                        name, 
+                        description, 
+                        num_employees AS "numEmployees", 
+                        logo_url AS "logoUrl" 
+                 FROM companies`;
+
+    let whereExpressions = []; //collection of conditions
+    let queryValues = []; //used to supply parameterized values to the SQL query.
+
+    if (filters.nameLike) { // checks if the 'filters' object has a property called 'name' and if its value is truthy
+      queryValues.push(`%${filters.nameLike}%`); //if exists, create new string with '%' characters, then push to queryValues
+      whereExpressions.push(`name ILIKE $${queryValues.length}`); 
+        //will fetch records where the name field contains the substring provided in filters.name 
+    }
+
+    if (filters.minEmployees) { //checks if the 'filters' object has a property called 'minEmployees' and if its value is truthy
+      queryValues.push(filters.minEmployees); // if exists, add to queryValues
+      whereExpressions.push(`num_employees >= $${queryValues.length}`); 
+        // ^^number after the $ corresponds to position of the value in queryValues array
+          // used to match with value in SQL Query.
+    }
+
+    if (filters.maxEmployees) { //checks if the 'filters' object has a property called 'maxEmployees' and if its value is truthy
+      queryValues.push(filters.maxEmployees); // if exists, add to queryValues
+      whereExpressions.push(`num_employees <= $${queryValues.length}`);
+    }
+
+    if (whereExpressions.length > 0) {  //check for filtering conditions stored in 'whereExpressions' array
+      query += " WHERE " + whereExpressions.join(" AND "); //joins whereExpressions into single string, seperates each with AND
+    }
+
+    query += " ORDER BY name"; //sort by name
+    const companiesRes = await db.query(query, queryValues); //execute the sql query
     return companiesRes.rows;
   }
 

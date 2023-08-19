@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">28.57% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -83,42 +83,78 @@
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const { BadRequestError } = require("../expressError");
 &nbsp;
 // THIS NEEDS SOME GREAT DOCUMENTATION.
+  
+/**Function designed to help with constructing the SET clause of a SQL UPDATE statement
+   * Given object of data to update (dataToUpdate)
+   * &amp; mapping of Javascript object property names to their corresponding SQL column names (jsToSql)
+   */
 &nbsp;
-function <span class="fstat-no" title="function not covered" >sqlForPartialUpdate(</span>dataToUpdate, jsToSql) {
-  const keys = <span class="cstat-no" title="statement not covered" >Object.keys(dataToUpdate);</span>
-<span class="cstat-no" title="statement not covered" >  if (keys.length === 0) <span class="cstat-no" title="statement not covered" >throw new BadRequestError("No data");</span></span>
+function sqlForPartialUpdate(dataToUpdate, jsToSql) {
+  const keys = Object.keys(dataToUpdate); 
+  // ^^extract property names (keys) from 'dataToUpdate' object then stores them in the 'keys' array
+  if (keys.length === 0) throw new BadRequestError("No data"); 
+  // ^^checks for keys by checking length of keys. If no keys it throws an error.
 &nbsp;
   // {firstName: 'Aliya', age: 32} =&gt; ['"first_name"=$1', '"age"=$2']
-  const cols = <span class="cstat-no" title="statement not covered" >keys.map(<span class="fstat-no" title="function not covered" >(c</span>olName, idx) =&gt;</span>
-<span class="cstat-no" title="statement not covered" >      `"${jsToSql[colName] || colName}"=$${idx + 1}`,</span>
+  
+  const cols = keys.map((colName, idx) =&gt; 
+  // ^^with (map) transform each key from dataToUpdate object ex: colName ='firstName' idx ='0'
+      `"${jsToSql[colName] || colName}"=$${idx + 1}`, 
+      // ^^checks if mapping for 'colName' in 'jsTOSql' object. If there is it uses that mapping.
+      // if not, defaults to using 'colName'.
+      // $${idx + 1} -- placeholder for SQL parameterized queries ex: $1.. $2.. $3..
   );
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return {</span>
-    setCols: cols.join(", "),
-    values: Object.values(dataToUpdate),
+  return {   //return object containing..
+    setCols: cols.join(", "), //SET clause of the SQL statement
+    values: Object.values(dataToUpdate), //an array of values to be used with the parameterized SQL query
   };
 }
 &nbsp;
@@ -130,7 +166,7 @@ module.exports = { sqlForPartialUpdate };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-15T23:19:27.353Z
+                at 2023-08-18T00:54:40.250Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
