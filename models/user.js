@@ -115,6 +115,25 @@ class User {
     return result.rows;
   }
 
+  /** Apply for a job 
+   * 
+   * The method takes in a username and a jobId and makes an entry in the applications table.
+   * 
+   * Returns undefined if applied successfully, throws an error if something goes wrong.
+   **/
+  static async applyForJob(username, jobId) {
+    const result = await db.query(
+      `INSERT INTO applications (username, job_id)
+       VALUES ($1, $2)
+       RETURNING job_id`,
+      [username, jobId]
+    );
+
+    if (!result.rows[0]) {
+      throw new NotFoundError(`Could not apply for job with id: ${jobId}`);
+    }
+  }
+
   /** Given a username, return data about user.
    *
    * Returns { username, first_name, last_name, is_admin, jobs }
@@ -138,6 +157,14 @@ class User {
     const user = userRes.rows[0];
 
     if (!user) throw new NotFoundError(`No user: ${username}`);
+
+    const userJobsRes = await db.query(
+      `SELECT job_id AS "jobId"
+       FROM applications
+       WHERE username = $1`, [username]
+    );
+
+    user.jobs = userJobsRes.rows.map(job => job.jobId);
 
     return user;
   }
@@ -204,6 +231,7 @@ class User {
 
     if (!user) throw new NotFoundError(`No user: ${username}`);
   }
+
 }
 
 
